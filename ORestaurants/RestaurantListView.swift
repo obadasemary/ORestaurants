@@ -37,12 +37,54 @@ struct RestaurantListView: View {
     
     var body: some View {
         NavigationView {
-            List(restaurants) { restaurant in
-                NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)) {
-                    BasicImageRow(restaurant: restaurant)
+            List {
+                ForEach(restaurants) { restaurant in
+                    NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)) {
+                        
+                        BasicImageRow(restaurant: restaurant)
+                            .contextMenu {
+                                
+                                Button(action: {
+                                    // mark the selected restaurant as check-in
+                                    self.checkIn(item: restaurant)
+                                }) {
+                                    HStack {
+                                        Text("Check-in")
+                                        Image(systemName: "checkmark.seal.fill")
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    // delete the selected restaurant
+                                    self.delete(item: restaurant)
+                                }) {
+                                    HStack {
+                                        Text("Delete")
+                                        Image(systemName: "trash")
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    // mark the selected restaurant as favorite
+                                    self.setFavorite(item: restaurant)
+                                    
+                                }) {
+                                    HStack {
+                                        Text("Favorite")
+                                        Image(systemName: "star")
+                                    }
+                                }
+                            }
+                            .onTapGesture {
+                                self.selectedRestaurant = restaurant
+                            }
+                    }
+                }
+                .onDelete { (indexSet) in
+                    self.restaurants.remove(atOffsets: indexSet)
                 }
             }
-            .navigationBarTitle("Restaurants", displayMode: NavigationBarItem.TitleDisplayMode.automatic)
+            .navigationBarTitle("Restaurant")
         }
     }
     
