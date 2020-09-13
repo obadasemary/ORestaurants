@@ -11,6 +11,7 @@ struct SettingView: View {
     
     private var displayOrders = [ "Alphabetical", "Show Favorite First", "Show Check-in First"]
     @State private var selectedOrder = 0
+    @State private var showCheckInOnly = false
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,9 @@ struct SettingView: View {
                 }
                 
                 Section(header: Text("FILTER PREFERENCE")) {
-                    Text("Filters")
+                    Toggle(isOn: $showCheckInOnly, label: {
+                        Text("Show Check-in Only")
+                    })
                 }
             }
             .navigationBarTitle("Settings")
