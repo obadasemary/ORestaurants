@@ -35,6 +35,6 @@ struct FullImageRow: View {
 
 struct FullImageRow_Previews: PreviewProvider {
     static var previews: some View {
-        FullImageRow(restaurant: restaurants[0])
+        FullImageRow(restaurant: Restaurant(name: "Teakha", type: "Tea House", phone: "354-243523", image: "teakha", priceLevel: 3, isFavorite: true, isCheckIn: true))
     }
 }
