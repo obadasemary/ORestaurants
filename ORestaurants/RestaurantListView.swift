@@ -41,7 +41,7 @@ struct RestaurantListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(restaurants) { restaurant in
+                ForEach(restaurants.sorted(by: self.settingStore.displayOrder.predicate())) { restaurant in
                     NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)) {
                         
                         if self.shouldShowItem(restaurant: restaurant) {
