@@ -93,13 +93,14 @@ struct RestaurantListView: View {
 //            .id(UUID())
             .navigationBarTitle("Restaurant")
             .navigationBarItems(trailing:
-                                    Button(action: {
-                                        self.showSettings = true
-                                    }, label: {
-                                        Image(systemName: "gear")
-                                            .font(.title)
-                                            .foregroundColor(.black)
-                                    })
+                                    
+                Button(action: {
+                    self.showSettings = true
+                }, label: {
+                    Image(systemName: "gear")
+                        .font(.title)
+                        .foregroundColor(.black)
+                })
             )
             .sheet(isPresented: $showSettings, content: {
                 SettingView().environmentObject(self.settingStore)
