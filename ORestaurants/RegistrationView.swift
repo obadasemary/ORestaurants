@@ -64,7 +64,7 @@ struct RegistrationView: View {
                 .padding(.bottom, 50)
                 
                 Button(action: {
-                    
+                    self.isPresented.toggle()
                 }, label: {
                     Text("Sign Up")
                         .font(.system(.body, design: .rounded))
@@ -86,6 +86,9 @@ struct RegistrationView: View {
                         )
                         .cornerRadius(10)
                         .padding(.horizontal)
+                })
+                .fullScreenCover(isPresented: $isPresented, content: {
+                    RestaurantListView().environmentObject(SettingStore())
                 })
                 
                 HStack {
