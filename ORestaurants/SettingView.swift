@@ -61,8 +61,6 @@ struct SettingView: View {
                                         self.presentationMode.wrappedValue.dismiss()
                                     }, label: {
                                         Text("Cancel")
-                                            .font(.subheadline)
-                                            .fontWeight(.black)
                                             .foregroundColor(.black)
                                     })
                                 , trailing:
@@ -71,8 +69,6 @@ struct SettingView: View {
                                         self.presentationMode.wrappedValue.dismiss()
                                     }, label: {
                                         Text("Save")
-                                            .font(.subheadline)
-                                            .fontWeight(.black)
                                             .foregroundColor(.black)
                                     })
             )
