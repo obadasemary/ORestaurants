@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		AF9C9682250ECC2E00010D16 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9681250ECC2E00010D16 /* SettingView.swift */; };
 		AF9C9684250EF6C100010D16 /* SettingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9683250EF6C100010D16 /* SettingStore.swift */; };
+		AF9C9686250FC21700010D16 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9685250FC21700010D16 /* RegistrationView.swift */; };
+		AF9C9688250FC36300010D16 /* RequirementText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9687250FC36300010D16 /* RequirementText.swift */; };
+		AF9C968A250FC36C00010D16 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C9689250FC36C00010D16 /* FormField.swift */; };
 		AFD5A873250D9FC80072DDE4 /* ORestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD5A872250D9FC80072DDE4 /* ORestaurantsApp.swift */; };
 		AFD5A875250D9FC80072DDE4 /* RestaurantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD5A874250D9FC80072DDE4 /* RestaurantListView.swift */; };
 		AFD5A877250D9FCB0072DDE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD5A876250D9FCB0072DDE4 /* Assets.xcassets */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		AF9C9681250ECC2E00010D16 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		AF9C9683250EF6C100010D16 /* SettingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStore.swift; sourceTree = "<group>"; };
+		AF9C9685250FC21700010D16 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		AF9C9687250FC36300010D16 /* RequirementText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementText.swift; sourceTree = "<group>"; };
+		AF9C9689250FC36C00010D16 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		AFD5A86F250D9FC80072DDE4 /* ORestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD5A872250D9FC80072DDE4 /* ORestaurantsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORestaurantsApp.swift; sourceTree = "<group>"; };
 		AFD5A874250D9FC80072DDE4 /* RestaurantListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListView.swift; sourceTree = "<group>"; };
@@ -111,6 +117,9 @@
 				AFD5A874250D9FC80072DDE4 /* RestaurantListView.swift */,
 				AF9C9681250ECC2E00010D16 /* SettingView.swift */,
 				AF9C9683250EF6C100010D16 /* SettingStore.swift */,
+				AF9C9685250FC21700010D16 /* RegistrationView.swift */,
+				AF9C9687250FC36300010D16 /* RequirementText.swift */,
+				AF9C9689250FC36C00010D16 /* FormField.swift */,
 				AFD5A8A1250DA1750072DDE4 /* BasicImageRow.swift */,
 				AFD5A8A3250DA1CC0072DDE4 /* FullImageRow.swift */,
 				AFD5A89F250DA08C0072DDE4 /* RestaurantDetailView.swift */,
@@ -277,9 +286,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF9C9688250FC36300010D16 /* RequirementText.swift in Sources */,
 				AF9C9684250EF6C100010D16 /* SettingStore.swift in Sources */,
+				AF9C968A250FC36C00010D16 /* FormField.swift in Sources */,
 				AFD5A8A0250DA08C0072DDE4 /* RestaurantDetailView.swift in Sources */,
 				AFD5A8A2250DA1750072DDE4 /* BasicImageRow.swift in Sources */,
+				AF9C9686250FC21700010D16 /* RegistrationView.swift in Sources */,
 				AFD5A875250D9FC80072DDE4 /* RestaurantListView.swift in Sources */,
 				AF9C9682250ECC2E00010D16 /* SettingView.swift in Sources */,
 				AFD5A8A4250DA1CC0072DDE4 /* FullImageRow.swift in Sources */,
