@@ -9,9 +9,11 @@ import SwiftUI
 
 struct RegistrationView: View {
     
-    @State private var username = ""
-    @State private var password = ""
-    @State private var passwordConfirm = ""
+    //    @State private var username = ""
+    //    @State private var password = ""
+    //    @State private var passwordConfirm = ""
+    
+    @ObservedObject private var userRegistrationViewModel = UserRegistrationViewModel()
     
     var body: some View {
         
@@ -24,22 +26,40 @@ struct RegistrationView: View {
                     .bold()
                     .padding(.bottom, 30)
                 
-                FormField(fieldName: "Username", fieldValue: $username)
-                RequirementText(text: "A minimum of 4 characters")
-                    .padding()
+                FormField(fieldName: "Username", fieldValue: $userRegistrationViewModel.username)
+                RequirementText(
+                    iconColor: userRegistrationViewModel.isUsernameLengthValid ? Color.secondary : Color(red: 251/255, green: 128/255, blue: 128/255),
+                    text: "A minimum of 4 characters",
+                    isStrikeThrough: userRegistrationViewModel.isUsernameLengthValid
+                )
+                .padding()
                 
-                FormField(fieldName: "Password", fieldValue: $password, isSecure: true)
+                FormField(fieldName: "Password", fieldValue: $userRegistrationViewModel.password, isSecure: true)
                 VStack {
                     
-                    RequirementText(iconName: "lock.open", text: "A minimum of 8 characters", isStrikeThrough: false)
-                    RequirementText(iconName: "lock.open", text: "One uppercase letter", isStrikeThrough: false)
+                    RequirementText(
+                        iconName: "lock.open",
+                        iconColor: userRegistrationViewModel.isPasswordLengthValid ? Color.secondary : Color(red: 251/255, green: 128/255, blue: 128/255),
+                        text: "A minimum of 8 characters",
+                        isStrikeThrough: userRegistrationViewModel.isPasswordLengthValid
+                    )
+                    RequirementText(
+                        iconName: "lock.open",
+                        iconColor: userRegistrationViewModel.isPasswordCapitalLetter ? Color.secondary : Color(red: 251/255, green: 128/255, blue: 128/255),
+                        text: "One uppercase letter",
+                        isStrikeThrough: userRegistrationViewModel.isPasswordCapitalLetter
+                    )
                 }
                 .padding()
                 
-                FormField(fieldName: "Confirm Password", fieldValue: $passwordConfirm, isSecure: true)
-                RequirementText(text: "Your confirm password should be the same as password", isStrikeThrough: false)
-                    .padding()
-                    .padding(.bottom, 50)
+                FormField(fieldName: "Confirm Password", fieldValue: $userRegistrationViewModel.passwordConfirm, isSecure: true)
+                RequirementText(
+                    iconColor: userRegistrationViewModel.isPasswordConfirmValid ? Color.secondary : Color(red: 251/255, green: 128/255, blue: 128/255),
+                    text: "Your confirm password should be the same as password",
+                    isStrikeThrough: userRegistrationViewModel.isPasswordConfirmValid
+                )
+                .padding()
+                .padding(.bottom, 50)
                 
                 Button(action: {
                     
