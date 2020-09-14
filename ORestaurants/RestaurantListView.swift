@@ -42,6 +42,7 @@ struct RestaurantListView: View {
         NavigationView {
             List {
                 ForEach(restaurants.sorted(by: self.settingStore.displayOrder.predicate())) { restaurant in
+                    
                     NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)) {
                         
                         if self.shouldShowItem(restaurant: restaurant) {
@@ -89,6 +90,7 @@ struct RestaurantListView: View {
                     self.restaurants.remove(atOffsets: indexSet)
                 }
             }
+//            .id(UUID())
             .navigationBarTitle("Restaurant")
             .navigationBarItems(trailing:
                                     Button(action: {
@@ -127,18 +129,18 @@ struct RestaurantListView: View {
         }
     }
     
-    //    init() {
-    //        let navBarAppearance = UINavigationBarAppearance()
-    //        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-    //        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
-    //        navBarAppearance.setBackIndicatorImage(UIImage(systemName: "arrow.turn.up.left"), transitionMaskImage: UIImage(systemName: "arrow.turn.up.left"))
-    //
-    //        UINavigationBar.appearance().standardAppearance = navBarAppearance
-    //        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-    //        UINavigationBar.appearance().compactAppearance = navBarAppearance
-    //
-    //        UINavigationBar.appearance().tintColor = .black
-    //    }
+    init() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
+        navBarAppearance.setBackIndicatorImage(UIImage(systemName: "arrow.turn.up.left"), transitionMaskImage: UIImage(systemName: "arrow.turn.up.left"))
+
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
+
+        UINavigationBar.appearance().tintColor = .black
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

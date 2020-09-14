@@ -79,6 +79,7 @@ final class SettingStore: ObservableObject {
         set {
             
             defaults.set(newValue, forKey: "view.preferences.showCheckInOnly")
+            defaults.synchronize()
         }
     }
     
@@ -92,6 +93,7 @@ final class SettingStore: ObservableObject {
         set {
             
             defaults.set(newValue.rawValue, forKey: "view.preferences.displayOrder")
+            defaults.synchronize()
         }
     }
     
@@ -105,6 +107,7 @@ final class SettingStore: ObservableObject {
         set {
             
             defaults.set(newValue, forKey: "view.preferences.maxPriceLevel")
+            defaults.synchronize()
         }
     }
 }
