@@ -36,7 +36,7 @@ struct RegistrationView: View {
                 }
                 .padding()
                 
-                FormField(fieldName: "Confirm Password", fieldValue: $password, isSecure: true)
+                FormField(fieldName: "Confirm Password", fieldValue: $passwordConfirm, isSecure: true)
                 RequirementText(text: "Your confirm password should be the same as password", isStrikeThrough: false)
                     .padding()
                     .padding(.bottom, 50)
