@@ -36,49 +36,53 @@ struct RestaurantListView: View {
     @State private var selectedRestaurant: Restaurant?
     @State private var showSettings: Bool = false
     
+    @EnvironmentObject var settingStore: SettingStore
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(restaurants) { restaurant in
+                ForEach(restaurants.sorted(by: self.settingStore.displayOrder.predicate())) { restaurant in
                     NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)) {
                         
-                        BasicImageRow(restaurant: restaurant)
-                            .contextMenu {
-                                
-                                Button(action: {
-                                    // mark the selected restaurant as check-in
-                                    self.checkIn(item: restaurant)
-                                }) {
-                                    HStack {
-                                        Text("Check-in")
-                                        Image(systemName: "checkmark.seal.fill")
-                                    }
-                                }
-                                
-                                Button(action: {
-                                    // delete the selected restaurant
-                                    self.delete(item: restaurant)
-                                }) {
-                                    HStack {
-                                        Text("Delete")
-                                        Image(systemName: "trash")
-                                    }
-                                }
-                                
-                                Button(action: {
-                                    // mark the selected restaurant as favorite
-                                    self.setFavorite(item: restaurant)
+                        if self.shouldShowItem(restaurant: restaurant) {
+                            BasicImageRow(restaurant: restaurant)
+                                .contextMenu {
                                     
-                                }) {
-                                    HStack {
-                                        Text("Favorite")
-                                        Image(systemName: "star")
+                                    Button(action: {
+                                        // mark the selected restaurant as check-in
+                                        self.checkIn(item: restaurant)
+                                    }) {
+                                        HStack {
+                                            Text("Check-in")
+                                            Image(systemName: "checkmark.seal.fill")
+                                        }
+                                    }
+                                    
+                                    Button(action: {
+                                        // delete the selected restaurant
+                                        self.delete(item: restaurant)
+                                    }) {
+                                        HStack {
+                                            Text("Delete")
+                                            Image(systemName: "trash")
+                                        }
+                                    }
+                                    
+                                    Button(action: {
+                                        // mark the selected restaurant as favorite
+                                        self.setFavorite(item: restaurant)
+                                        
+                                    }) {
+                                        HStack {
+                                            Text("Favorite")
+                                            Image(systemName: "star")
+                                        }
                                     }
                                 }
-                            }
-                            .onTapGesture {
-                                self.selectedRestaurant = restaurant
-                            }
+                                .onTapGesture {
+                                    self.selectedRestaurant = restaurant
+                                }
+                        }
                     }
                 }
                 .onDelete { (indexSet) in
@@ -96,9 +100,13 @@ struct RestaurantListView: View {
                                     })
             )
             .sheet(isPresented: $showSettings, content: {
-                SettingView()
+                SettingView().environmentObject(self.settingStore)
             })
         }
+    }
+    
+    private func shouldShowItem(restaurant: Restaurant) -> Bool {
+        return (!self.settingStore.showCheckInOnly || restaurant.isCheckIn) && (restaurant.priceLevel <= self.settingStore.maxPriceLevel)
     }
     
     private func delete(item restaurant: Restaurant) {
@@ -119,22 +127,22 @@ struct RestaurantListView: View {
         }
     }
     
-    init() {
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
-        navBarAppearance.setBackIndicatorImage(UIImage(systemName: "arrow.turn.up.left"), transitionMaskImage: UIImage(systemName: "arrow.turn.up.left"))
-        
-        UINavigationBar.appearance().standardAppearance = navBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-        UINavigationBar.appearance().compactAppearance = navBarAppearance
-        
-        UINavigationBar.appearance().tintColor = .black
-    }
+    //    init() {
+    //        let navBarAppearance = UINavigationBarAppearance()
+    //        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
+    //        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
+    //        navBarAppearance.setBackIndicatorImage(UIImage(systemName: "arrow.turn.up.left"), transitionMaskImage: UIImage(systemName: "arrow.turn.up.left"))
+    //
+    //        UINavigationBar.appearance().standardAppearance = navBarAppearance
+    //        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+    //        UINavigationBar.appearance().compactAppearance = navBarAppearance
+    //
+    //        UINavigationBar.appearance().tintColor = .black
+    //    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantListView()
+        RestaurantListView().environmentObject(SettingStore())
     }
 }

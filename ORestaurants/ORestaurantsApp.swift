@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ORestaurantsApp: App {
+    
+    var settingStore = SettingStore()
+    
     var body: some Scene {
         WindowGroup {
-            RestaurantListView()
+            RestaurantListView().environmentObject(settingStore)
         }
     }
 }

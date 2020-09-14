@@ -10,18 +10,20 @@ import SwiftUI
 struct SettingView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    private var displayOrders = [ "Alphabetical", "Show Favorite First", "Show Check-in First"]
-    @State private var selectedOrder = 0
+    
+    @State private var selectedOrder = DisplayOrderType.alphabetical
     @State private var showCheckInOnly = false
     @State private var maxPriceLevel = 5
+    
+    @EnvironmentObject var settingStore: SettingStore
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("SORT PREFERENCE")) {
                     Picker(selection: $selectedOrder, label: Text("Display Order")) {
-                        ForEach(0 ..< displayOrders.count, id: \.self) {
-                            Text(self.displayOrders[$0])
+                        ForEach(DisplayOrderType.allCases, id: \.self) { orderType in
+                            Text(orderType.text)
                         }
                     }
                 }
@@ -57,27 +59,36 @@ struct SettingView: View {
             .navigationBarTitle("Settings")
             .navigationBarItems(leading:
                                     
-                                    Button(action: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }, label: {
-                                        Text("Cancel")
-                                            .foregroundColor(.black)
-                                    })
-                                , trailing:
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Cancel")
+                        .foregroundColor(.black)
+                })
+                , trailing:
                                     
-                                    Button(action: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }, label: {
-                                        Text("Save")
-                                            .foregroundColor(.black)
-                                    })
+                Button(action: {
+                    self.settingStore.showCheckInOnly = self.showCheckInOnly
+                    self.settingStore.displayOrder = self.selectedOrder
+                    self.settingStore.maxPriceLevel = self.maxPriceLevel
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Save")
+                        .foregroundColor(.black)
+                })
             )
+        }
+        .onAppear {
+            
+            self.selectedOrder = self.settingStore.displayOrder
+            self.showCheckInOnly = self.settingStore.showCheckInOnly
+            self.maxPriceLevel = self.settingStore.maxPriceLevel
         }
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView().environmentObject(SettingStore())
     }
 }
