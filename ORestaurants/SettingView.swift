@@ -15,7 +15,7 @@ struct SettingView: View {
     @State private var showCheckInOnly = false
     @State private var maxPriceLevel = 5
     
-    var settingStore: SettingStore
+    @EnvironmentObject var settingStore: SettingStore
     
     var body: some View {
         NavigationView {
@@ -59,23 +59,23 @@ struct SettingView: View {
             .navigationBarTitle("Settings")
             .navigationBarItems(leading:
                                     
-                                    Button(action: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }, label: {
-                                        Text("Cancel")
-                                            .foregroundColor(.black)
-                                    })
-                                , trailing:
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Cancel")
+                        .foregroundColor(.black)
+                })
+                , trailing:
                                     
-                                    Button(action: {
-                                        self.settingStore.showCheckInOnly = self.showCheckInOnly
-                                        self.settingStore.displayOrder = self.selectedOrder
-                                        self.settingStore.maxPriceLevel = self.maxPriceLevel
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }, label: {
-                                        Text("Save")
-                                            .foregroundColor(.black)
-                                    })
+                Button(action: {
+                    self.settingStore.showCheckInOnly = self.showCheckInOnly
+                    self.settingStore.displayOrder = self.selectedOrder
+                    self.settingStore.maxPriceLevel = self.maxPriceLevel
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Save")
+                        .foregroundColor(.black)
+                })
             )
             .onAppear {
                 
@@ -89,6 +89,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(settingStore: SettingStore())
+        SettingView().environmentObject(SettingStore())
     }
 }

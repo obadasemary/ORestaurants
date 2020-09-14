@@ -14,7 +14,7 @@ struct ORestaurantsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RestaurantListView(settingStore: SettingStore())
+            RestaurantListView().environmentObject(settingStore)
         }
     }
 }
