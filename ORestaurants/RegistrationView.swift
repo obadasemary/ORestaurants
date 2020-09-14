@@ -9,9 +9,11 @@ import SwiftUI
 
 struct RegistrationView: View {
     
-    //    @State private var username = ""
-    //    @State private var password = ""
-    //    @State private var passwordConfirm = ""
+    @State private var isPresented = false
+    
+    @State private var username = ""
+    @State private var password = ""
+    @State private var passwordConfirm = ""
     
     @ObservedObject private var userRegistrationViewModel = UserRegistrationViewModel()
     
@@ -93,12 +95,18 @@ struct RegistrationView: View {
                         .bold()
                     
                     Button(action: {
-                        
+                        self.isPresented.toggle()
                     }, label: {
                         Text("Sign in")
                             .font(.system(.body, design: .rounded))
                             .bold()
                             .foregroundColor(Color(red: 251/255, green: 128/255, blue: 128/255))
+                    })
+//                    .sheet(isPresented: $isPresented, content: {
+//                        RestaurantListView().environmentObject(SettingStore())
+//                    })
+                    .fullScreenCover(isPresented: $isPresented, content: {
+                        RestaurantListView().environmentObject(SettingStore())
                     })
                 }
                 .padding(.top, 50)
