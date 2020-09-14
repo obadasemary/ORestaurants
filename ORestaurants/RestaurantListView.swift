@@ -36,6 +36,8 @@ struct RestaurantListView: View {
     @State private var selectedRestaurant: Restaurant?
     @State private var showSettings: Bool = false
     
+    var settingStore: SettingStore
+    
     var body: some View {
         NavigationView {
             List {
@@ -96,7 +98,7 @@ struct RestaurantListView: View {
                                     })
             )
             .sheet(isPresented: $showSettings, content: {
-                SettingView()
+                SettingView(settingStore: self.settingStore)
             })
         }
     }
@@ -119,22 +121,22 @@ struct RestaurantListView: View {
         }
     }
     
-    init() {
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
-        navBarAppearance.setBackIndicatorImage(UIImage(systemName: "arrow.turn.up.left"), transitionMaskImage: UIImage(systemName: "arrow.turn.up.left"))
-        
-        UINavigationBar.appearance().standardAppearance = navBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-        UINavigationBar.appearance().compactAppearance = navBarAppearance
-        
-        UINavigationBar.appearance().tintColor = .black
-    }
+//    init() {
+//        let navBarAppearance = UINavigationBarAppearance()
+//        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
+//        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
+//        navBarAppearance.setBackIndicatorImage(UIImage(systemName: "arrow.turn.up.left"), transitionMaskImage: UIImage(systemName: "arrow.turn.up.left"))
+//        
+//        UINavigationBar.appearance().standardAppearance = navBarAppearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+//        UINavigationBar.appearance().compactAppearance = navBarAppearance
+//        
+//        UINavigationBar.appearance().tintColor = .black
+//    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantListView()
+        RestaurantListView(settingStore: SettingStore())
     }
 }

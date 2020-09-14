@@ -7,6 +7,62 @@
 
 import Foundation
 
+final class SettingStore {
+    
+    var defaults: UserDefaults
+    
+    init(defaults: UserDefaults = .standard) {
+        
+        self.defaults = defaults
+        
+        defaults.register(defaults: [
+            "view.preferences.showCheckInOnly" : false,
+            "view.preferences.displayOrder" : 0,
+            "view.preferences.maxPriceLevel" : 5
+            
+        ])
+    }
+    
+    var showCheckInOnly: Bool {
+        
+        get {
+            
+            defaults.bool(forKey: "view.preferences.showCheckInOnly")
+        }
+        
+        set {
+            
+            defaults.set(newValue, forKey: "view.preferences.showCheckInOnly")
+        }
+    }
+    
+    var displayOrder: DisplayOrderType {
+        
+        get {
+            
+            DisplayOrderType(type: defaults.integer(forKey: "view.preferences.displayOrder"))
+        }
+        
+        set {
+            
+            defaults.set(newValue.rawValue, forKey: "view.preferences.displayOrder")
+        }
+    }
+    
+    var maxPriceLevel: Int {
+        
+        get {
+            
+            defaults.integer(forKey: "view.preferences.maxPriceLevel")
+        }
+        
+        set {
+            
+            defaults.set(newValue, forKey: "view.preferences.maxPriceLevel")
+        }
+    }
+}
+
 enum DisplayOrderType: Int, CaseIterable {
     
     case alphabetical = 0
