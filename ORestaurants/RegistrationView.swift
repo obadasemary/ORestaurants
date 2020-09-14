@@ -87,6 +87,12 @@ struct RegistrationView: View {
                         .cornerRadius(10)
                         .padding(.horizontal)
                 })
+                .disabled(
+                    !userRegistrationViewModel.isUsernameLengthValid ||
+                        !userRegistrationViewModel.isPasswordLengthValid ||
+                        !userRegistrationViewModel.isPasswordCapitalLetter ||
+                        !userRegistrationViewModel.isPasswordConfirmValid
+                )
                 .fullScreenCover(isPresented: $isPresented, content: {
                     RestaurantListView().environmentObject(SettingStore())
                 })
@@ -105,9 +111,9 @@ struct RegistrationView: View {
                             .bold()
                             .foregroundColor(Color(red: 251/255, green: 128/255, blue: 128/255))
                     })
-//                    .sheet(isPresented: $isPresented, content: {
-//                        RestaurantListView().environmentObject(SettingStore())
-//                    })
+                    //                    .sheet(isPresented: $isPresented, content: {
+                    //                        RestaurantListView().environmentObject(SettingStore())
+                    //                    })
                     .fullScreenCover(isPresented: $isPresented, content: {
                         RestaurantListView().environmentObject(SettingStore())
                     })
