@@ -11,6 +11,8 @@
 ### Data Sharing with Combine and Environment Objects
 
 <img src="https://github.com/obadasemary/ORestaurants/blob/main/swiftui-registration-1.png" alt="HTML5 Icon">
+<img src="https://github.com/obadasemary/ORestaurants/blob/main/swiftui-registration-6.png" alt="HTML5 Icon">
+<img src="https://github.com/obadasemary/ORestaurants/blob/main/swiftui-registration-7.png" alt="HTML5 Icon">
 
 <img src="https://github.com/obadasemary/ORestaurants/blob/main/swiftui-form-1.png" alt="HTML5 Icon">
 <img src="https://github.com/obadasemary/ORestaurants/blob/main/swiftui-form-5.png" alt="HTML5 Icon">
