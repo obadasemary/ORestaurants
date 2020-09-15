@@ -61,6 +61,5 @@ class UserRegistrationViewModel: ObservableObject {
             }
             .assign(to: \UserRegistrationViewModel.isPasswordConfirmValid, on: self)
             .store(in: &cancellableSet)
-            
     }
 }
