@@ -38,12 +38,9 @@ struct FormField: View {
     }
 }
 
-//struct FormField_Previews: PreviewProvider {
-//    static var previews: some View {
-//        
-////        @Binding var fieldValue: String = "obada"
-////
-////        FormField(fieldName: "Obada", fieldValue: fieldValue, isSecure: false)
-////        FormField(fieldName: "Password", fieldValue: <#T##Binding<String>#>, isSecure: <#T##Bool#>)
-//    }
-//}
+struct FormField_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        FormField(fieldName: "Obada", fieldValue: Binding<String>.constant("Obada"), isSecure: false)
+    }
+}

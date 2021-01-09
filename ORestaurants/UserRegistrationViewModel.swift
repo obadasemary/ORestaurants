@@ -21,6 +21,8 @@ class UserRegistrationViewModel: ObservableObject {
     @Published var isPasswordCapitalLetter = false
     @Published var isPasswordConfirmValid = false
     
+    @Published var isReadySubmit: Bool = false
+    
     private var cancellableSet: Set<AnyCancellable> = []
     
     init() {
@@ -61,5 +63,25 @@ class UserRegistrationViewModel: ObservableObject {
             }
             .assign(to: \UserRegistrationViewModel.isPasswordConfirmValid, on: self)
             .store(in: &cancellableSet)
+        
+        Publishers.Zip4(
+            $isUsernameLengthValid,
+            $isPasswordLengthValid,
+            $isPasswordCapitalLetter,
+            $isPasswordConfirmValid
+        )
+        .receive(on: RunLoop.main)
+        .map { isUsernameLengthValid, isPasswordLengthValid, isPasswordCapitalLetter, isPasswordConfirmValid in
+            
+            print("username", isUsernameLengthValid && isPasswordLengthValid && isPasswordCapitalLetter && isPasswordConfirmValid)
+            
+            if isUsernameLengthValid && isPasswordLengthValid && isPasswordCapitalLetter && isPasswordLengthValid {
+                return true
+            } else {
+                return false
+            }
+        }
+        .assign(to: \UserRegistrationViewModel.isReadySubmit, on: self)
+        .store(in: &cancellableSet)
     }
 }

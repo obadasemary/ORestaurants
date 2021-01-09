@@ -88,10 +88,11 @@ struct RegistrationView: View {
                         .padding(.horizontal)
                 })
                 .disabled(
-                    !userRegistrationViewModel.isUsernameLengthValid ||
-                        !userRegistrationViewModel.isPasswordLengthValid ||
-                        !userRegistrationViewModel.isPasswordCapitalLetter ||
-                        !userRegistrationViewModel.isPasswordConfirmValid
+                    !userRegistrationViewModel.isReadySubmit
+//                    !userRegistrationViewModel.isUsernameLengthValid ||
+//                        !userRegistrationViewModel.isPasswordLengthValid ||
+//                        !userRegistrationViewModel.isPasswordCapitalLetter ||
+//                        !userRegistrationViewModel.isPasswordConfirmValid
                 )
                 .fullScreenCover(isPresented: $isPresented, content: {
                     RestaurantListView().environmentObject(SettingStore())
